@@ -1,7 +1,7 @@
 <template>
   <div class="perceptron">
     <label>
-      数字:
+      Number:
       <input
         ref="input"
         v-model.number="num"
@@ -40,8 +40,6 @@ export default defineComponent({
       this.drawData(this.mnistData);
     },
     drawData(data: [Number]) {
-      console.error(data);
-      console.error(this.$refs);
       const context = this.$refs.canvas.getContext("2d");
       mnist.draw(data, context);
     }
