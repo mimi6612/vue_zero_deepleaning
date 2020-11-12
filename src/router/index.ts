@@ -1,6 +1,7 @@
 import { createRouter, createWebHashHistory } from "vue-router";
 import Home from "../views/Home.vue";
 import Perceptron from "../views/Perceptron.vue";
+import Mnist from "@/views/Mnist.vue";
 
 const routes = [
   {
@@ -21,6 +22,11 @@ const routes = [
     path: "/perceptron",
     name: "Perceptron",
     component: Perceptron
+  },
+  {
+    path: "/mnist",
+    name: "Mnist",
+    component: Mnist
   }
 ];
 

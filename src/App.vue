@@ -2,7 +2,8 @@
   <div id="nav">
     <router-link to="/">Home</router-link> |
     <router-link to="/about">About</router-link> |
-    <router-link to="/perceptron">Perceptron</router-link>
+    <router-link to="/perceptron">Perceptron</router-link> |
+    <router-link to="/mnist">Mnist</router-link>
   </div>
   <router-view />
 </template>
