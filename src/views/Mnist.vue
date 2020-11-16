@@ -13,11 +13,14 @@
     <button type="button" @click="reloadImage">reload</button>
     <canvas ref="canvas" width="30" height="30" />
     {{ mnistData }}
+    {{ sampleWeight }}
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
+
+import sampleWeight from "@/assets/sample_weight.json";
 
 const mnist = require("mnist");
 
@@ -27,7 +30,8 @@ export default defineComponent({
   data: function(): any {
     return {
       num: 1,
-      mnistData: []
+      mnistData: [],
+      sampleWeight
     };
   },
   mounted() {
