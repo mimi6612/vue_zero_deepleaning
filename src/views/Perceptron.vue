@@ -9,7 +9,7 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import Perceptron from "@/models/perceptron";
+import Perceptron from "@/npmlib/models/perceptron";
 
 export default defineComponent({
   name: "Perceptron",

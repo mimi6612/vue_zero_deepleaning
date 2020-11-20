@@ -48,9 +48,9 @@ import * as tf from "@tensorflow/tfjs";
 import sampleWeight from "@/assets/sample_weight.json";
 
 const mnist = require("mnist");
-import AffineLayer from "@/models/affineLayer";
-import SigmoidLayer from "@/models/sigmoidLayer";
-import NeuralnetMnist from "@/models/neuralnetMnist";
+import AffineLayer from "@/lib/models/affineLayer";
+import SigmoidLayer from "@/lib/models/sigmoidLayer";
+import NeuralnetMnist from "@/lib/models/neuralnetMnist";
 
 export default defineComponent({
   name: "Mnist",

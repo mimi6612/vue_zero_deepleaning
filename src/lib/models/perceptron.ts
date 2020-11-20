@@ -1,6 +1,6 @@
 import * as tf from "@tensorflow/tfjs";
 import { NumericDataType } from "@tensorflow/tfjs";
-import stepFunction from "@/lib/stepFunction";
+import stepFunction from "@/lib/utils/stepFunction";
 export default class Perceptron {
   // プロパティは名前: 型
   w1: number;
