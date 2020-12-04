@@ -1,5 +1,5 @@
 <template>
-  <div class="perceptron">
+  <div class="mnist">
     <label>
       Number:
       <input
@@ -51,6 +51,12 @@ const mnist = require("mnist");
 import AffineLayer from "@/lib/models/affineLayer";
 import SigmoidLayer from "@/lib/models/sigmoidLayer";
 import NeuralnetMnist from "@/lib/models/neuralnetMnist";
+
+import mnistBatch from "@/lib/utils/mnistBatch";
+
+import { meanSquaredError } from "@/lib/utils/meanSquaredError";
+
+import { crossEntropyError } from "@/lib/utils/crossEntropyError";
 
 export default defineComponent({
   name: "Mnist",
@@ -104,6 +110,16 @@ export default defineComponent({
       reloadImage();
     });
 
+    const batches = mnistBatch.getBatch(10);
+
+    const error = meanSquaredError(a.as1D(), b.as1D());
+
+    const crossError = crossEntropyError(
+      tf.tensor([1, 0]),
+      tf.tensor([0.8, 0.2])
+    );
+    console.error(crossError);
+
     return {
       sampleWeight,
       affineLayer,
@@ -111,7 +127,10 @@ export default defineComponent({
       b,
       canvasRef,
       neuralnetState,
-      reloadImage
+      reloadImage,
+      batches,
+      error,
+      crossError
     };
   }
 });
