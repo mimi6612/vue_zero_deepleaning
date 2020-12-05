@@ -1,12 +1,15 @@
 import * as tf from "@tensorflow/tfjs";
 export function crossEntropyError(
-  labels: tf.Tensor1D,
-  logits: tf.Tensor1D
+  labels: tf.Tensor,
+  logits: tf.Tensor
 ): number {
+  const logitsReshaped = logits.reshape([logits.size]);
+  const labelsReshaped = labels.reshape([labels.size]);
+  -tf.dot(labelsReshaped, logitsReshaped.log()).print();
   return (
-    tf
-      .dot(labels, logits.log())
-      .asScalar()
-      .arraySync() * -1.0
+    -tf
+      .dot(labelsReshaped, logitsReshaped.log())
+      .sum()
+      .arraySync() / logits.shape[0]
   );
 }

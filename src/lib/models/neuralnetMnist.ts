@@ -1,4 +1,5 @@
 import * as tf from "@tensorflow/tfjs";
+import { crossEntropyError } from "@/lib/utils/crossEntropyError";
 interface NeuralnetMnistInteterface {
   W1: number[][];
   W2: number[][];
@@ -31,5 +32,10 @@ export default class NeuralnetMnist {
     const a3: tf.Tensor<tf.Rank.R1> = z2.dot(this.W3).add(this.b3);
     const z3 = a3.softmax();
     return z3;
+  }
+
+  loss(t: tf.Tensor, x: tf.Tensor): number {
+    const y = this.predict(x);
+    return crossEntropyError(t, y);
   }
 }

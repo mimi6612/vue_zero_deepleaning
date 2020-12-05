@@ -1,6 +1,8 @@
 <template>
   <div class="mnist">
     {{ neuralnetState.batchPrediction }}
+    {{ neuralnetState.loss }}
+    {{ crossError }}
     <label>
       Number:
       <input
@@ -81,12 +83,14 @@ export default defineComponent({
       probability: number[];
       prediction: number;
       batchPrediction: any;
+      loss: any;
     }>({
       num: 1,
       x: [],
       probability: [],
       prediction: -1,
-      batchPrediction: null
+      batchPrediction: null,
+      loss: null
     });
     const canvasRef = ref<HTMLCanvasElement>();
     const drawImage = (data: number[]) => {
@@ -100,14 +104,19 @@ export default defineComponent({
       return neuralnetMnist.predict(x);
     };
 
-    const predicrtMnistBatch = (): tf.Tensor => {
-      const set = mnist.set(10, 0);
+    const predicrtMnistBatch = () => {
+      const set = mnist.set(30, 10);
       console.error(set);
-      const xBatch = tf.tensor(set.test.map(t => t.input));
+      const xBatch = tf.tensor(
+        set.training.map((t: { input: number[] }) => t.input)
+      );
+      const tBatch = tf.tensor(
+        set.training.map((t: { output: number[] }) => t.output)
+      );
       neuralnetState.batchPrediction = neuralnetMnist
         .predict(xBatch)
         .arraySync();
-      return neuralnetState.batchPrediction;
+      neuralnetState.loss = neuralnetMnist.loss(tBatch, xBatch);
     };
 
     const reloadImage = async () => {
@@ -129,10 +138,17 @@ export default defineComponent({
     const error = meanSquaredError(a.as1D(), b.as1D());
 
     const crossError = crossEntropyError(
-      tf.tensor([1, 0]),
-      tf.tensor([0.8, 0.2])
+      tf.tensor([
+        [1, 0],
+        [0, 1],
+        [1, 0]
+      ]),
+      tf.tensor([
+        [0.8, 0.2],
+        [0.3, 0.7],
+        [0.5, 0.5]
+      ])
     );
-    console.error(crossError);
 
     return {
       sampleWeight,
