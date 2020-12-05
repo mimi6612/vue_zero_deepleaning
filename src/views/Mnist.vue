@@ -1,5 +1,6 @@
 <template>
   <div class="mnist">
+    {{ neuralnetState.batchPrediction }}
     <label>
       Number:
       <input
@@ -79,11 +80,13 @@ export default defineComponent({
       x: number[];
       probability: number[];
       prediction: number;
+      batchPrediction: any;
     }>({
       num: 1,
       x: [],
       probability: [],
-      prediction: -1
+      prediction: -1,
+      batchPrediction: null
     });
     const canvasRef = ref<HTMLCanvasElement>();
     const drawImage = (data: number[]) => {
@@ -97,6 +100,16 @@ export default defineComponent({
       return neuralnetMnist.predict(x);
     };
 
+    const predicrtMnistBatch = (): tf.Tensor => {
+      const set = mnist.set(10, 0);
+      console.error(set);
+      const xBatch = tf.tensor(set.test.map(t => t.input));
+      neuralnetState.batchPrediction = neuralnetMnist
+        .predict(xBatch)
+        .arraySync();
+      return neuralnetState.batchPrediction;
+    };
+
     const reloadImage = async () => {
       const x = mnist[neuralnetState.num].get();
       drawImage(x);
@@ -107,6 +120,7 @@ export default defineComponent({
     };
 
     onMounted(() => {
+      predicrtMnistBatch();
       reloadImage();
     });
 
