@@ -116,7 +116,7 @@ export default defineComponent({
       neuralnetState.batchPrediction = neuralnetMnist
         .predict(xBatch)
         .arraySync();
-      neuralnetState.loss = neuralnetMnist.loss(tBatch, xBatch);
+      neuralnetState.loss = neuralnetMnist.loss(xBatch, tBatch);
     };
 
     const reloadImage = async () => {
