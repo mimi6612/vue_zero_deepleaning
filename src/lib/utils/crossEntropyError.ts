@@ -1,7 +1,7 @@
 import * as tf from "@tensorflow/tfjs";
 export function crossEntropyError(
-  labels: tf.Tensor,
-  logits: tf.Tensor
+  logits: tf.Tensor,
+  labels: tf.Tensor
 ): number {
   const logitsReshaped = logits.reshape([logits.size]);
   const labelsReshaped = labels.reshape([labels.size]);

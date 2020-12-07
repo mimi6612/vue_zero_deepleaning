@@ -139,14 +139,14 @@ export default defineComponent({
 
     const crossError = crossEntropyError(
       tf.tensor([
-        [1, 0],
-        [0, 1],
-        [1, 0]
-      ]),
-      tf.tensor([
         [0.8, 0.2],
         [0.3, 0.7],
         [0.5, 0.5]
+      ]),
+      tf.tensor([
+        [1, 0],
+        [0, 1],
+        [1, 0]
       ])
     );
 
