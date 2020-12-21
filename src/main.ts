@@ -3,8 +3,7 @@ import App from "./App.vue";
 import store from "./store";
 import router from "./router";
 
-import "@/assets/Skeleton/css/normalize.css";
-import "@/assets/Skeleton/css/skeleton.css";
+import "milligram/dist/milligram.min.css";
 
 createApp(App)
   .use(router)
