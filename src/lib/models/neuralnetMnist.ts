@@ -36,6 +36,8 @@ export default class NeuralnetMnist {
 
   loss(x: tf.Tensor, t: tf.Tensor): number {
     const y = this.predict(x);
-    return crossEntropyError(y, t);
+    return crossEntropyError(y, t)
+      .asScalar()
+      .arraySync();
   }
 }

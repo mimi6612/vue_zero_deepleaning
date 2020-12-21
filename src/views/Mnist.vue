@@ -1,5 +1,9 @@
 <template>
   <div class="mnist">
+    lllllhhhhhhkkkkkkkkksssssははtttttqqqqqqqwwwwwww
+    {{ mnistTwoLayerNet.predict.value }}
+    {{ mnistTwoLayerNet.loss.value }}
+    <!-- {{ mnistTwoLayerNet.grad.value }} -->
     {{ neuralnetState.batchPrediction }}
     {{ neuralnetState.loss }}
     {{ crossError }}
@@ -60,6 +64,8 @@ import mnistBatch from "@/lib/utils/mnistBatch";
 import { meanSquaredError } from "@/lib/utils/meanSquaredError";
 
 import { crossEntropyError } from "@/lib/utils/crossEntropyError";
+
+import { useMnistTwoLayerNet } from "@/composables/mnistTwoLayerNet";
 
 export default defineComponent({
   name: "Mnist",
@@ -150,6 +156,8 @@ export default defineComponent({
       ])
     );
 
+    const mnistTwoLayerNet = useMnistTwoLayerNet();
+
     return {
       sampleWeight,
       affineLayer,
@@ -160,7 +168,8 @@ export default defineComponent({
       reloadImage,
       batches,
       error,
-      crossError
+      crossError,
+      mnistTwoLayerNet
     };
   }
 });
@@ -171,6 +180,6 @@ export default defineComponent({
   margin: 30px;
 }
 .canvas {
-  width: 100px;
+  width: 200px;
 }
 </style>
