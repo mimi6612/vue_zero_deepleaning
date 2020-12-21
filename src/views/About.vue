@@ -29,3 +29,8 @@
     <input class="button button-clear" type="submit" value="Clear Button" />
   </div>
 </template>
+
+<style lang="sass" scoped>
+.about
+  margin-bottom: 10px
+</style>
